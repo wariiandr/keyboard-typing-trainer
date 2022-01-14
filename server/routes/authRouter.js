@@ -12,6 +12,7 @@ router.post('/registration', [
         .isLength({ min: 6 })
         .matches(/\d/)
 ], controller.registration);
+
 router.post('/login', controller.login);
 
 module.exports = router;

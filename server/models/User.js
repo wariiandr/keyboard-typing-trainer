@@ -1,4 +1,4 @@
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const User = new Schema({
     username: {
@@ -10,6 +10,11 @@ const User = new Schema({
         type: String,
         required: true
     },
+    game_ids: {
+        type: Array,
+        required: true,
+        unique: true
+    }
 })
 
 module.exports = model('User', User);

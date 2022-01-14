@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const authRouter = require('./routes/authRouter');
+const authMiddleware = require('./middlewares/authMiddleware');
+const router = require('./routes/router');
 
 const PORT = process.env.PORT || 3000;
 
@@ -8,6 +10,8 @@ const app = express();
 
 app.use(express.json());
 app.use('/auth', authRouter);
+app.use(authMiddleware);
+app.use('/api', router);
 
 async function start() {
     try {

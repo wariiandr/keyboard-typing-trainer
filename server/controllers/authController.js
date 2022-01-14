@@ -30,7 +30,7 @@ class authContoller {
             
             const hashPassword = bcrypt.hashSync(password, 10);
 
-            const user = new User({ username, password: hashPassword });
+            const user = new User({ username, password: hashPassword, game_ids: [] });
             await user.save();
 
             return res.json({ message: 'User registered successfully' });
@@ -62,6 +62,15 @@ class authContoller {
         } catch (err) {
             console.log(err);
             return res.status(400).json({ message: 'Login error' });
+        }
+    }
+
+    async getUser(req, res) {
+        try {
+            const user = await User.findById(req.user.id)
+            res.json(user)
+        } catch (err) {
+            console.log(err);
         }
     }
 }
