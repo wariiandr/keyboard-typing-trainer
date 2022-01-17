@@ -3,7 +3,7 @@
         <form @submit.prevent ="submitHandler()" class="auth-form__form
             d-flex flex-column 
             justify-content-center align-items-center 
-            border border-secondary rounded
+            border rounded
             shadow bg-body rounded">
             <div class="mb-3">
                 <label for="username" class="col-form-label">Username</label>
@@ -30,6 +30,8 @@
                 <a class="text-decoration-none d-flex align-items-center" href="/registration">Not registered yet ?</a>
                 <button type="submit" class="btn btn-primary">Sign in</button>
             </div>
+
+            <p class="auth-form__error text-danger text-center mt-4">{{ errorMessage }}</p>
         </form>
     </div>
 </template>
@@ -40,6 +42,10 @@ export default {
         isRegistration: {
             type: Boolean,
             required: true
+        },
+        errorMessage: {
+            type: String,
+            required: false
         }
     },
     data() {
@@ -69,7 +75,7 @@ export default {
 
     &__form {
         width: 30%;
-        height: 50%;
+        height: 350px;
         position: absolute;
         top: 0;
         left: 0;
@@ -80,6 +86,10 @@ export default {
 
     &__bottom {
         width: 100%;
+    }
+
+    &__error {
+        width: 70%;
     }
 }
 

@@ -1,9 +1,10 @@
 <template>
     <div class="registration">
-        <h2 class="text-center mt-5">Registration</h2>
+        <h2 class="text-center text-primary mt-5">Registration</h2>
         <auth-form 
             :isRegistration="isRegistration"
             @submit-handler="registration"
+            :errorMessage="errorMessage"
         />
     </div>
 </template>
@@ -18,6 +19,7 @@ export default {
     data() {
         return {
             isRegistration: true,
+            errorMessage: ''
         }
     },
     methods: {
@@ -29,8 +31,12 @@ export default {
                 },
                 body: JSON.stringify(formData)
             })
-
-            if (res.status === 400) this.$router.push({name: 'Login'});
+            const data = await res.json()
+            
+            if (res.status === 200) this.$router.push({name: 'Login'});
+            else {
+                this.errorMessage = data.errors === undefined ? data.message : `${data.message}. ${data.errors[0].msg}.`;
+            }
         }
     }
 }

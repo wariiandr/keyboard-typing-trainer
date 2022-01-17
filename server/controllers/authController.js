@@ -15,19 +15,18 @@ class authContoller {
 
     async registration(req, res) {
         try {
+            const { username, password } = req.body;
+
+            const userInDataBase = await User.findOne({ username });
+            if (userInDataBase) {
+                return res.status(400).json({ message: 'User with this name already exists' });
+            }
+
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return res.status(400).json({ message: 'Registration error', errors:  errors.array()});
             }
 
-            const { username, password } = req.body;
-
-            const userInDataBase = await User.findOne({ username });
-
-            if (userInDataBase) {
-                res.status(400).json({ message: 'User with this name already exists' });
-            }
-            
             const hashPassword = bcrypt.hashSync(password, 10);
 
             const user = new User({ username, password: hashPassword, game_ids: [] });

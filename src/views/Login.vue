@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <h2 class="text-center mt-5">Log in</h2>
+        <h2 class="text-center text-primary mt-5">Log in</h2>
         <auth-form 
             :isRegistration="isRegistration"
             @submit-handler="login"
@@ -29,7 +29,7 @@ export default {
                 },
                 body: JSON.stringify(formData)
             })
-
+            console.log(res.body)
             if (res.status === 200) this.$router.push({name: 'Main'});
         }
     }
