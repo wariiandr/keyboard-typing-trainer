@@ -1,5 +1,7 @@
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
+const corsMiddleware = require('./middlewares/corsMiddleware');
 const authRouter = require('./routes/authRouter');
 const authMiddleware = require('./middlewares/authMiddleware');
 const router = require('./routes/router');
@@ -8,7 +10,10 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
+app.use('/', express.static(path.join(__dirname, '../dist')));
 app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(corsMiddleware);
 app.use('/auth', authRouter);
 app.use(authMiddleware);
 app.use('/api', router);

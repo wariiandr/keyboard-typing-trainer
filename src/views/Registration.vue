@@ -1,9 +1,9 @@
 <template>
-    <div class="login">
-        <h2 class="text-center mt-5">Log in</h2>
+    <div class="registration">
+        <h2 class="text-center mt-5">Registration</h2>
         <auth-form 
             :isRegistration="isRegistration"
-            @submit-handler="login"
+            @submit-handler="registration"
         />
     </div>
 </template>
@@ -12,17 +12,17 @@
 import AuthForm from '@/components/AuthForm';
 
 export default {
-    components: { 
+    components: {
         AuthForm
     },
     data() {
         return {
-            isRegistration: false,
+            isRegistration: true,
         }
     },
     methods: {
-        async login(formData) {
-            const res = await fetch('http://localhost:3000/auth/login', {
+        async registration(formData) {
+            const res = await fetch('http://localhost:3000/auth/registration', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -30,10 +30,9 @@ export default {
                 body: JSON.stringify(formData)
             })
 
-            if (res.status === 200) this.$router.push({name: 'Main'});
+            if (res.status === 400) this.$router.push({name: 'Login'});
         }
     }
-
 }
 </script>
 

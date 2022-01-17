@@ -1,6 +1,6 @@
 <template>
     <div class="auth-form">
-        <form class="auth-form__form 
+        <form @submit.prevent ="submitHandler()" class="auth-form__form
             d-flex flex-column 
             justify-content-center align-items-center 
             border border-secondary rounded
@@ -8,24 +8,26 @@
             <div class="mb-3">
                 <label for="username" class="col-form-label">Username</label>
                 <div>
-                    <input type="text" class="form-control" name="username">
+                    <input type="text" class="form-control" name="username"
+                    v-model="username">
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="password" class="col-form-label">Password</label>
                 <div>
-                    <input type="password" class="form-control" name="password">
+                    <input type="password" class="form-control" name="password"
+                    v-model="password">
                 </div>
             </div>
 
-            <div class="auth-form__bottom d-flex flex-row justify-content-evenly" v-if="isRegister">
+            <div class="auth-form__bottom d-flex flex-row justify-content-evenly" v-if="isRegistration">
                 <a class="text-decoration-none d-flex align-items-center" href="/login">Already registered ?</a>
                 <button type="submit" class="btn btn-primary">Sign up</button>
             </div>
 
             <div class="auth-form__bottom d-flex flex-row justify-content-evenly" v-else>
-                <a class="text-decoration-none d-flex align-items-center" href="/register">Not registered yet ?</a>
+                <a class="text-decoration-none d-flex align-items-center" href="/registration">Not registered yet ?</a>
                 <button type="submit" class="btn btn-primary">Sign in</button>
             </div>
         </form>
@@ -35,9 +37,22 @@
 <script>
 export default {
     props: {
-        isRegister: {
+        isRegistration: {
             type: Boolean,
             required: true
+        }
+    },
+    data() {
+        return {
+            username: '',
+            password: ''
+        }
+    },
+    methods: {
+        submitHandler() {
+            this.$emit('submit-handler', { username: this.username, password: this.password });
+            this.username = '';
+            this.password = '';
         }
     }
 }
