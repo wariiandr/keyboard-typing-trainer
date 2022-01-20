@@ -10,6 +10,7 @@
 
 <script>
 import AuthForm from '@/components/AuthForm';
+import { mapMutations, mapActions } from 'vuex';
 
 export default {
     components: { 
@@ -21,6 +22,8 @@ export default {
         }
     },
     methods: {
+        ...mapMutations(['updateToken']),
+        ...mapActions(['fetchUser']),
         async login(formData) {
             const res = await fetch('http://localhost:3000/auth/login', {
                 method: 'POST',
@@ -29,8 +32,12 @@ export default {
                 },
                 body: JSON.stringify(formData)
             })
-            console.log(res.body)
-            if (res.status === 200) this.$router.push({name: 'Main'});
+            const token = await res.json();
+
+            this.updateToken(token);
+            this.fetchUser(token);
+            
+            //if (res.status === 200) this.$router.push({name: 'Main'});
         }
     }
 
