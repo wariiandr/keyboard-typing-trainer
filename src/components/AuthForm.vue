@@ -23,12 +23,12 @@
 
             <div class="auth-form__bottom d-flex flex-row justify-content-evenly" v-if="isRegistration">
                 <a class="text-decoration-none d-flex align-items-center" href="/login">Already registered ?</a>
-                <button type="submit" class="btn btn-primary">Sign up</button>
+                <button type="submit" class="btn">Sign up</button>
             </div>
 
             <div class="auth-form__bottom d-flex flex-row justify-content-evenly" v-else>
                 <a class="text-decoration-none d-flex align-items-center" href="/registration">Not registered yet ?</a>
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <button type="submit" class="btn">Sign in</button>
             </div>
 
             <p class="auth-form__error text-danger text-center mt-4">{{ errorMessage }}</p>
@@ -90,6 +90,14 @@ export default {
 
     &__error {
         width: 70%;
+    }
+}
+.btn {
+    background-color: #0088cc;
+    color: white;
+    &:hover {
+        background-color: #007ab8;
+        color: white;
     }
 }
 

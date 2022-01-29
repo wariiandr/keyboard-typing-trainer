@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <h2 class="text-center text-primary mt-5">Log in</h2>
+        <h2 class="h2 text-center mt-5">Login</h2>
         <auth-form 
             :isRegistration="isRegistration"
             @submit-handler="login"
@@ -35,15 +35,17 @@ export default {
             const token = await res.json();
 
             this.updateToken(token);
-            this.fetchUser(token);
+            localStorage.setItem('token', token);
             
-            //if (res.status === 200) this.$router.push({name: 'Main'});
+            if (res.status === 200) this.$router.push({name: 'Main'});
         }
     }
 
 }
 </script>
 
-<style>
-
+<style scoped>
+.h2 {
+    color: #0088cc;
+}
 </style>

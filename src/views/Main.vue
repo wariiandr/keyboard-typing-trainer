@@ -5,8 +5,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 export default {
+    components: {
+
+    },
+    data() {
+        return {
+
+        }
+    },
     methods: {
         
     },
@@ -16,6 +23,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 </style>

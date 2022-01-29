@@ -1,6 +1,6 @@
 <template>
     <div class="registration">
-        <h2 class="text-center text-primary mt-5">Registration</h2>
+        <h2 class="h2 text-center mt-5">Registration</h2>
         <auth-form 
             :isRegistration="isRegistration"
             @submit-handler="registration"
@@ -42,6 +42,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.h2 {
+    color: #0088cc;
+}
 </style>

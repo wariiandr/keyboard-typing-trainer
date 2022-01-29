@@ -10,11 +10,10 @@ const User = new Schema({
         type: String,
         required: true
     },
-    game_ids: {
-        type: Array,
-        required: true,
-        unique: true
-    }
+    game_ids: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: 'Game'
+    }]
 })
 
 module.exports = model('User', User);
