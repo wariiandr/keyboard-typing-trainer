@@ -6,7 +6,8 @@
         <div v-if="words.length" class="game__words text-center">
             <span class="d-inline-block fs-5"
                 v-for="(word, idx) in words"
-                :key="idx">
+                :key="idx"
+                :ref="idx">
                 {{ word }}&nbsp;
             </span>
         </div>
@@ -37,15 +38,31 @@ export default {
             this.words = await res.json();
         },
         clearInput() {
-            this.currentWord = this.words[(this.currentWordIndex++)];
+            this.currentWordIndex++;
             this.inputValue = '';
         },
         compareValues() {
             this.currentWord = this.words[this.currentWordIndex];
+
             if (this.currentWord.startsWith(this.inputValue)) return true;
             else return false;
         },
         colorHandler() {
+            this.isCorrect = this.compareValues();
+            let currentHTMLElem = this.$refs[this.currentWordIndex][0];
+
+            if (this.isCorrect && this.currentWord === this.inputValue) {
+                currentHTMLElem.classList.add('text-success');
+                currentHTMLElem.classList.remove('text-danger');
+            }
+            else if (!this.isCorrect) {
+                currentHTMLElem.classList.add('text-danger');
+                currentHTMLElem.classList.remove('text-success');
+            }
+            else {
+                currentHTMLElem.classList.remove('text-success');
+                currentHTMLElem.classList.remove('text-danger');
+            }
             
         }
     },
@@ -54,7 +71,8 @@ export default {
     },
     watch: {
         inputValue: function () {
-            console.log(this.inputValue, this.compareValues())
+            console.log(this.inputValue, this.currentWord, this.compareValues())
+            this.colorHandler()
         }
     }   
 }
