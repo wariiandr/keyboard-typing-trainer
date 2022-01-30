@@ -8,9 +8,9 @@
                 </a>
 
                 <div class="d-flex flex-row align-items-center">
-                    <a class="nav-link fs-5 text-decoration-none text-white" href="/login">Login</a>
+                    <a class="nav-link text-decoration-none text-white" href="/login">Login</a>
                     <span class="text-white">or</span>
-                    <a class="nav-link fs-5 text-decoration-none text-white" href="/registration">Registration</a>
+                    <a class="nav-link text-decoration-none text-white" href="/registration">Registration</a>
                 </div>
             </div>
         </nav>

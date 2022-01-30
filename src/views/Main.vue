@@ -1,7 +1,7 @@
 <template>
-    <div class="main">
+    <div class="main d-flex justify-content-center">
         <div v-if="!isStart" class="d-flex justify-content-center mt-5">
-            <img class="main__img shadow bg-body" src="/img/keyboard.jpg" alt="keyboard">
+            <img class="main__img shadow bg-body" src="/img/keyboard.webp" alt="keyboard">
 
             <div class="main__content ml-5">
                 <h1 class="main__h1">Keyboard Typing Trainer</h1>
